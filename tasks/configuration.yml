@@ -9,9 +9,9 @@
     mode: 0644
 
 - name: copy another config parts
-  copy:
+  template:
     src: "{{ item }}"
-    dest: "{{ prometheus_alertmanager_config_dir }}/conf.d/"
+    dest: "{{ prometheus_alertmanager_config_dir }}/conf.d/{{ item | basename | regex_replace('\\.j2','') }}"
     owner: "{{ prometheus_alertmanager_user }}"
     group: "{{ prometheus_alertmanager_group }}"
     mode: 0644
